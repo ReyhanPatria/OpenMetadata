@@ -17,7 +17,6 @@
 package org.openmetadata.catalog.jdbi3;
 
 import org.apache.commons.codec.binary.Hex;
-import org.jdbi.v3.sqlobject.statement.SqlQuery;
 import org.jdbi.v3.sqlobject.transaction.Transaction;
 import org.openmetadata.catalog.Entity;
 import org.openmetadata.catalog.entity.data.Location;
@@ -208,7 +207,7 @@ public class TableRepository extends EntityRepository<Table> {
   public void addQuery(UUID tableId, SQLQuery query) throws IOException {
     // Validate the request content
     try {
-       byte [] checksum = MessageDigest.getInstance("MD5").digest(query.getQuery().getBytes());
+       byte[] checksum = MessageDigest.getInstance("MD5").digest(query.getQuery().getBytes());
        query.setChecksum(Hex.encodeHexString(checksum));
     } catch(NoSuchAlgorithmException e) {
       throw new RuntimeException(e);
